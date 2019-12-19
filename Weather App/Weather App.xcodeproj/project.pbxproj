@@ -16,6 +16,7 @@
 		8A71079A23AB51E900A44BB6 /* Weather_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A71079923AB51E900A44BB6 /* Weather_AppUITests.swift */; };
 		8A7107AF23AB586500A44BB6 /* WeatherHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107AE23AB586500A44BB6 /* WeatherHomeViewController.swift */; };
 		8A7107B123AB588400A44BB6 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107B023AB588400A44BB6 /* WeatherDetailViewController.swift */; };
+		8A7107B423AB641D00A44BB6 /* WeatherCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		8A71079B23AB51E900A44BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A7107AE23AB586500A44BB6 /* WeatherHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHomeViewController.swift; sourceTree = "<group>"; };
 		8A7107B023AB588400A44BB6 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
+		8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCustomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		8A7107AA23AB581100A44BB6 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8A7107B223AB63AD00A44BB6 /* Cell */,
 				8A7107AE23AB586500A44BB6 /* WeatherHomeViewController.swift */,
 			);
 			path = Home;
@@ -177,6 +180,14 @@
 			children = (
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8A7107B223AB63AD00A44BB6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +325,7 @@
 				8A7107AF23AB586500A44BB6 /* WeatherHomeViewController.swift in Sources */,
 				8A7107B123AB588400A44BB6 /* WeatherDetailViewController.swift in Sources */,
 				8A71077A23AB51E200A44BB6 /* SceneDelegate.swift in Sources */,
+				8A7107B423AB641D00A44BB6 /* WeatherCustomCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
