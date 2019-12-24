@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 class LocationSearchService {
     
     var searchTask: URLSessionDataTask?
@@ -18,7 +16,7 @@ class LocationSearchService {
     func getLocations(locationName: String, completionHandler: @escaping((NSMutableArray) ->
         ()),  errorHandler: @escaping (()->Void)) {
         
-        let urlString = URL(string: "\(AppConstants.baseURL)search.ashx?query=\(locationName)&num_of_results=3&format=json&key=\(AppConstants.premiumAPIKey)")
+        let urlString = URL(string: "\(AppConstants.baseURL)search.ashx?query=\(locationName)&format=json&key=\(AppConstants.premiumAPIKey)")
         if let url = urlString {
             
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
