@@ -55,6 +55,7 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
             cell.cityLabel?.text = locationInfoObj.areaName
             cell.countyLabel?.text = locationInfoObj.country
             cell.weatherImageView?.image = UIImage(named: "weather_placeholer")
+           
             return cell
         }
     
