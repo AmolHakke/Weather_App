@@ -23,6 +23,8 @@ class WeatherDetailViewController: UIViewController {
     let locationDetailService = LocationDetailService()
     
     var locationInfo = LocationInfo()
+    
+    var db:CustomDB = CustomDB()
       
     private var locationDetailInfoObj = LocationCurrentWeatherInfo()
     
@@ -32,12 +34,14 @@ class WeatherDetailViewController: UIViewController {
        }
     
     func setupUI() {
+        
         activityIndicator.stopAnimating()
         self.weatherDescLabel.text = "Weather Desc : " + self.locationDetailInfoObj.weatherDesc
         self.tempcLabel.text = "Temp C :" + self.locationDetailInfoObj.temp_C + " C"
         self.humidityLabel.text = "Humidity :" + self.locationDetailInfoObj.humidity + " %"
         print("LocationURL  " + self.locationDetailInfoObj.weatherIconUrl)
         self.weatherIconImage.load(url: URL(string: self.locationDetailInfoObj.weatherIconUrl)!)
+        db.insert(areaName: self.locationInfo.areaName, country: self.locationInfo.country, latitude: self.locationInfo.latitude, longitude: self.locationInfo.longitude, population: self.locationInfo.population, region: self.locationInfo.region, WeatherUrl: self.locationInfo.WeatherUrl)
     }
     
     func fetchLocationDetail() {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite3
 
 class WeatherHomeViewController: UIViewController {
     
@@ -20,10 +21,16 @@ class WeatherHomeViewController: UIViewController {
     
     private var locationInfoObj = LocationInfo()
     
+    var db:CustomDB = CustomDB()
+    
+    var locationIn:[LocationInfo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    //MARK:- Prepare Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "WeatherDetailViewControllerSegue" {
@@ -38,6 +45,24 @@ class WeatherHomeViewController: UIViewController {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return false
+    }
+    
+    //MARK:- Get previously viewed any city's weather
+    func getViewedCitiesList() {
+        locationIn = db.read()
+        print("LocationIn count : \(locationIn.count)")
+        self.locationArray =  NSMutableArray()
+        for item in locationIn {
+           self.locationArray.add(item)
+        }
+          DispatchQueue.main.async {
+              self.weatherTableView.reloadData()
+          }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // No need for semicolon
+        self.getViewedCitiesList()
     }
 }
 
@@ -89,11 +114,20 @@ extension WeatherHomeViewController : UISearchBarDelegate {
                 
         locationSerarchService.getLocations(locationName: searchText, completionHandler: { resultArray in
             
+            self.locationArray =  NSMutableArray()
             self.locationArray = resultArray
             
-            DispatchQueue.main.async {
-                self.weatherTableView.reloadData()
+            if self.locationArray.count > 0
+            {
+                DispatchQueue.main.async {
+                   self.weatherTableView.reloadData()
+                }
             }
+            else
+            {
+                self.getViewedCitiesList()
+            }
+           
        }, errorHandler: {
                  self.locationArray =  NSMutableArray()
                  DispatchQueue.main.async {
