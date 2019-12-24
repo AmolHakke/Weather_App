@@ -27,6 +27,7 @@ class WeatherHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getViewedCitiesList()
         // Do any additional setup after loading the view.
     }
     
@@ -52,17 +53,13 @@ class WeatherHomeViewController: UIViewController {
         locationIn = db.read()
         print("LocationIn count : \(locationIn.count)")
         self.locationArray =  NSMutableArray()
+        
         for item in locationIn {
-           self.locationArray.add(item)
+            self.locationArray.add(item)
         }
           DispatchQueue.main.async {
               self.weatherTableView.reloadData()
           }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated) // No need for semicolon
-        self.getViewedCitiesList()
     }
 }
 

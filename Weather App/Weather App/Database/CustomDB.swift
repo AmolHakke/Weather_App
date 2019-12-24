@@ -39,7 +39,7 @@ class CustomDB
     }
     
     func createTable() {
-        let createTableString = "CREATE TABLE IF NOT EXISTS LocationInfo(areaName TEXT PRIMARY KEY NOT NULL,country TEXT,latitude TEXT, longitude TEXT, population TEXT, region TEXT, WeatherUrl TEXT);"
+        let createTableString = "CREATE TABLE IF NOT EXISTS LocationInfo(Id INTEGER PRIMARY KEY autoincrement, areaName TEXT NOT NULL,country TEXT,latitude TEXT, longitude TEXT, population TEXT, region TEXT, WeatherUrl TEXT);"
         var createTableStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, createTableString, -1, &createTableStatement, nil) == SQLITE_OK
         {
@@ -89,18 +89,18 @@ class CustomDB
     }
     
     func read() -> [LocationInfo] {
-        let queryStatementString = "SELECT * FROM locationinfo;"
+        let queryStatementString = "SELECT * FROM locationinfo order by Id desc LIMIT 10;"
         var queryStatement: OpaquePointer? = nil
         var psns : [LocationInfo] = []
         if sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
             while sqlite3_step(queryStatement) == SQLITE_ROW {
-                let areaName = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                let country = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                let latitude = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
-                let longitude = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                let population = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                let region = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
-                let WeatherUrl = String(describing: String(cString: sqlite3_column_text(queryStatement, 6)))
+                let areaName = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                let country = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                let latitude = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                let longitude = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                let population = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+                let region = String(describing: String(cString: sqlite3_column_text(queryStatement, 6)))
+                let WeatherUrl = String(describing: String(cString: sqlite3_column_text(queryStatement, 7)))
                 
                 psns.append(LocationInfo().initWithLocationInfoResult(l_areaName: areaName, l_country: country, l_latitude: latitude, l_longitude: longitude, l_population: population, l_region: region, l_WeatherUrl: WeatherUrl))
                 print("Query Result:")
