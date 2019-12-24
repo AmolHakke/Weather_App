@@ -25,7 +25,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="83D-0Z-aQQ"/>
                                 </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FA9-ec-Wq7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FA9-ec-Wq7">
                                 <rect key="frame" x="0.0" y="132" width="414" height="730"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -63,13 +63,23 @@
                                                         <constraint firstItem="eFx-vo-Kdq" firstAttribute="height" secondItem="06e-Gx-llS" secondAttribute="height" id="ffk-K5-act"/>
                                                     </constraints>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCL-j7-bXo">
+                                                    <rect key="frame" x="0.0" y="98" width="414" height="2"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="qKU-0o-tGB"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="eCL-j7-bXo" secondAttribute="bottom" constant="-1" id="8Ve-1c-BWL"/>
                                                 <constraint firstItem="YZl-J1-DTW" firstAttribute="leading" secondItem="dMk-tk-nKN" secondAttribute="trailing" constant="25" id="8nl-qy-8df"/>
                                                 <constraint firstAttribute="trailing" secondItem="YZl-J1-DTW" secondAttribute="trailing" constant="10" id="APL-uI-Q7Q"/>
                                                 <constraint firstItem="YZl-J1-DTW" firstAttribute="height" secondItem="paT-U1-nDl" secondAttribute="height" multiplier="0.8" id="Ba5-H0-GpL"/>
                                                 <constraint firstItem="YZl-J1-DTW" firstAttribute="centerY" secondItem="dMk-tk-nKN" secondAttribute="centerY" id="SP7-ad-IOJ"/>
+                                                <constraint firstItem="eCL-j7-bXo" firstAttribute="centerX" secondItem="paT-U1-nDl" secondAttribute="centerX" id="nju-wT-GVI"/>
                                                 <constraint firstItem="dMk-tk-nKN" firstAttribute="leading" secondItem="paT-U1-nDl" secondAttribute="leading" constant="20" id="qeE-jE-hYL"/>
+                                                <constraint firstItem="eCL-j7-bXo" firstAttribute="width" secondItem="paT-U1-nDl" secondAttribute="width" id="qkt-Yf-sHz"/>
                                                 <constraint firstItem="dMk-tk-nKN" firstAttribute="centerY" secondItem="paT-U1-nDl" secondAttribute="centerY" id="tpJ-yA-ozx"/>
                                             </constraints>
                                         </tableViewCellContentView>
