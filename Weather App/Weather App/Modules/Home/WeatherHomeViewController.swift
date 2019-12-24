@@ -61,6 +61,11 @@ class WeatherHomeViewController: UIViewController {
               self.weatherTableView.reloadData()
           }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated) // No need for semicolon
+        db.deleteRecordExceptTop10()
+    }
 }
 
 extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource

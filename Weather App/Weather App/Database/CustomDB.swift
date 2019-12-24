@@ -113,11 +113,10 @@ class CustomDB
         return psns
     }
     
-    func deleteByID(id:Int) {
-        let deleteStatementStirng = "DELETE FROM person WHERE Id = ?;"
+    func deleteRecordExceptTop10() {
+        let deleteStatementStirng = "DELETE FROM locationinfo WHERE Id NOT IN (SELECT id FROM locationinfo order by Id desc LIMIT 10);"
         var deleteStatement: OpaquePointer? = nil
         if sqlite3_prepare_v2(db, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
-            sqlite3_bind_int(deleteStatement, 1, Int32(id))
             if sqlite3_step(deleteStatement) == SQLITE_DONE {
                 print("Successfully deleted row.")
             } else {
