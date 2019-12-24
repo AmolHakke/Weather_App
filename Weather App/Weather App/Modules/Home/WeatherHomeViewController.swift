@@ -15,6 +15,8 @@ class WeatherHomeViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var labelTitle: UILabel!
+    
     let locationSerarchService = LocationSearchService()
     
     private var locationArray = NSMutableArray()
@@ -50,16 +52,27 @@ class WeatherHomeViewController: UIViewController {
     
     //MARK:- Get previously viewed any city's weather
     func getViewedCitiesList() {
-        locationIn = db.read()
-        print("LocationIn count : \(locationIn.count)")
-        self.locationArray =  NSMutableArray()
         
+        locationIn = db.read()
+        self.locationArray =  NSMutableArray()
         for item in locationIn {
             self.locationArray.add(item)
         }
-          DispatchQueue.main.async {
-              self.weatherTableView.reloadData()
-          }
+        
+        DispatchQueue.main.async {
+            self.weatherTableView.reloadData()
+        }
+        
+        DispatchQueue.main.async {
+        if self.locationArray.count > 0 {
+            self.labelTitle.text = AppConstants.historyTitle
+        }
+        else
+        {
+            self.labelTitle.text = ""
+        }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,11 +131,11 @@ extension WeatherHomeViewController : UISearchBarDelegate {
             
             self.locationArray =  NSMutableArray()
             self.locationArray = resultArray
-            
             if self.locationArray.count > 0
             {
                 DispatchQueue.main.async {
                    self.weatherTableView.reloadData()
+                   self.labelTitle.text = AppConstants.searchResultTitle
                 }
             }
             else

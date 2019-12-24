@@ -14,4 +14,8 @@ struct AppConstants {
     
     // Weather Report API Key
     static let premiumAPIKey = "686e7daf43c54574bed65256191912"
+    
+    static let historyTitle = "History"
+    
+    static let searchResultTitle = "Search Result"
 }
