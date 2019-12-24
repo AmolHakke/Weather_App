@@ -32,10 +32,12 @@ class WeatherDetailViewController: UIViewController {
        }
     
     func setupUI() {
-       activityIndicator.stopAnimating()
-       self.weatherDescLabel.text = "Weather Desc : " + self.locationDetailInfoObj.weatherDesc
-       self.tempcLabel.text = "Temp C : " + self.locationDetailInfoObj.temp_C
-       self.humidityLabel.text = "Humidity : " + self.locationDetailInfoObj.humidity
+        activityIndicator.stopAnimating()
+        self.weatherDescLabel.text = "Weather Desc : " + self.locationDetailInfoObj.weatherDesc
+        self.tempcLabel.text = "Temp C : " + self.locationDetailInfoObj.temp_C
+        self.humidityLabel.text = "Humidity : " + self.locationDetailInfoObj.humidity
+        print("LocationURL  " + self.locationDetailInfoObj.weatherIconUrl)
+        self.weatherIconImage.load(url: URL(string: self.locationDetailInfoObj.weatherIconUrl)!)
     }
     
     func fetchLocationDetail() {
