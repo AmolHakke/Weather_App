@@ -24,6 +24,21 @@ class WeatherHomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "WeatherDetailViewControllerSegue" {
+            if segue.destination.isKind(of: WeatherDetailViewController.self) {
+                let secondVC = segue.destination as! WeatherDetailViewController
+
+                let indexPath = sender as! IndexPath
+                secondVC.locationInfo = locationArray[indexPath.row] as! LocationInfo
+            }
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return false
+    }
 }
 
 extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
@@ -46,6 +61,12 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
             return 100.0
+        }
+    
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+
+            performSegue(withIdentifier: "WeatherDetailViewControllerSegue", sender: indexPath)
         }
 }
 
