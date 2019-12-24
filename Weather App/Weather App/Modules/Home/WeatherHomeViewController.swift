@@ -12,6 +12,8 @@ class WeatherHomeViewController: UIViewController {
     
     @IBOutlet weak var weatherTableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -41,4 +43,30 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
             return 100.0
         }
 }
+
+extension WeatherHomeViewController : UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+//        locationSerarchService.getLocations(locationName: searchText, completionHandler: { _ in  [LocationInfo]()
+//
+//        }, errorHandler: {
+//
+//        })
+        
+    }
+}
+
 

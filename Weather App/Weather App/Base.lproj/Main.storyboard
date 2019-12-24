@@ -21,6 +21,9 @@
                                     <constraint firstAttribute="height" constant="44" id="p63-9j-6Rl"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="83D-0Z-aQQ"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FA9-ec-Wq7">
                                 <rect key="frame" x="0.0" y="132" width="414" height="730"/>
@@ -98,6 +101,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Today's Weather" id="x5g-TK-Klz"/>
                     <connections>
+                        <outlet property="searchBar" destination="sBn-FI-tvO" id="QbY-m4-etQ"/>
                         <outlet property="weatherTableView" destination="FA9-ec-Wq7" id="IhF-1C-9Pv"/>
                     </connections>
                 </viewController>
