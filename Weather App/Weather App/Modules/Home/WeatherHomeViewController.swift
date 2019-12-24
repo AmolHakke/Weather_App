@@ -16,13 +16,14 @@ class WeatherHomeViewController: UIViewController {
     
     let locationSerarchService = LocationSearchService()
     
-    private var locationArray = [LocationInfo]()
+    private var locationArray = NSMutableArray()
+    
+    private var locationInfoObj = LocationInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
 }
 
 extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
@@ -35,12 +36,11 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            
            let cell:WeatherCustomCell = tableView.dequeueReusableCell(withIdentifier: "WeatherCustomCellID") as! WeatherCustomCell
-           
-           cell.cityLabel?.text = "Punggol"
-           cell.countyLabel?.text = "Singapore"
-           cell.weatherImageView?.image = UIImage(named: "weather_placeholer")
-           
-           return cell
+            locationInfoObj = locationArray.object(at: indexPath.row) as! LocationInfo
+            cell.cityLabel?.text = locationInfoObj.areaName
+            cell.countyLabel?.text = locationInfoObj.country
+            cell.weatherImageView?.image = UIImage(named: "weather_placeholer")
+            return cell
         }
     
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,21 +65,19 @@ extension WeatherHomeViewController : UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
                 
-        locationSerarchService.getLocations(locationName: searchText, completionHandler: { [weak self] locationData in
-                   
-            self?.locationArray = locationData
+        locationSerarchService.getLocations(locationName: searchText, completionHandler: { resultArray in
+            
+            self.locationArray = resultArray
             
             DispatchQueue.main.async {
-                self?.weatherTableView.reloadData()
+                self.weatherTableView.reloadData()
             }
-
        }, errorHandler: {
-            self.locationArray =  [LocationInfo]()
-            DispatchQueue.main.async {
-               self.weatherTableView.reloadData()
-            }
-       })
-        
+                 self.locationArray =  NSMutableArray()
+                 DispatchQueue.main.async {
+                    self.weatherTableView.reloadData()
+                 }
+            })
     }
 }
 

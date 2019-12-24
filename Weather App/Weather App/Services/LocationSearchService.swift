@@ -15,7 +15,8 @@ class LocationSearchService {
     var searchTask: URLSessionDataTask?
     //https://www.freecodecamp.org/news/how-to-make-your-first-api-call-in-swift/
     
-    func getLocations(locationName: String, completionHandler: @escaping(([LocationInfo]) ->Void),  errorHandler: @escaping (()->Void)) {
+    func getLocations(locationName: String, completionHandler: @escaping((NSMutableArray) ->
+        ()),  errorHandler: @escaping (()->Void)) {
         
         let urlString = URL(string: "\(AppConstants.baseURL)search.ashx?query=\(locationName)&num_of_results=3&format=json&key=\(AppConstants.premiumAPIKey)")
         if let url = urlString {
@@ -31,14 +32,17 @@ class LocationSearchService {
                 
                 print(jsonResult)
                 
-                var locationInfoObjects = [LocationInfo]()
+                var locationInfoObjects: NSMutableArray = []
+                  
                 
                 guard let searchApiJson = jsonResult["search_api"] as? [String: Any],
                                        let resultArray = searchApiJson["result"] as? [[String: Any]] else {
+                                           locationInfoObjects = NSMutableArray()
                                            completionHandler(locationInfoObjects)
                                            return
                                    }
                                    for resultJson in resultArray {
+                                     
                                        guard let areaNameArray = resultJson["areaName"] as? [[String: Any]],
                                            let areaNameObject = areaNameArray.first,
                                            let areaName = areaNameObject["value"] as? String,
@@ -62,7 +66,7 @@ class LocationSearchService {
                                        }
                                     let locationInfo = LocationInfo().initWithLocationInfoResult(l_areaName: areaName, l_country: country, l_latitude: latitude, l_longitude: longitude, l_population: population, l_region: region, l_WeatherUrl: weatherUrl)
                                       
-                                       locationInfoObjects.append(locationInfo)
+                                       locationInfoObjects.add(locationInfo)
                                    }
                                    completionHandler(locationInfoObjects)
                 
