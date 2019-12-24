@@ -29,6 +29,7 @@ class WeatherHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        weatherTableView.keyboardDismissMode = .onDrag
         self.getViewedCitiesList()
         // Do any additional setup after loading the view.
     }
@@ -113,12 +114,8 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
 
 extension WeatherHomeViewController : UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
