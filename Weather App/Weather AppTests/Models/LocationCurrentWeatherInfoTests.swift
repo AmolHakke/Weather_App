@@ -22,9 +22,16 @@ class LocationCurrentWeatherInfoTests: XCTestCase {
     
     func testHumidityMatch()
     {
-        let locationCurrentWeatherInfo = LocationCurrentWeatherInfo().initWithLocationCurrentWeatherInfo(l_weatherIconUrl: "https://google.com", l_humidity: "60", l_temp_C: "30", l_weatherDesc: "Cloudly")
+        let locationCurrentWeatherInfoMock = LocationCurrentWeatherInfo().initWithLocationCurrentWeatherInfo(l_weatherIconUrl: "https://google.com", l_humidity: "60", l_temp_C: "30", l_weatherDesc: "Cloudly")
         
-        XCTAssertEqual(locationCurrentWeatherInfo.humidity, "60")
+        XCTAssertEqual(locationCurrentWeatherInfoMock.humidity, "60")
+    }
+    
+    func testShouldHumidityIsEmpty()
+    {
+        let locationCurrentWeatherInfoMock = LocationCurrentWeatherInfo().initWithLocationCurrentWeatherInfo(l_weatherIconUrl:nil, l_humidity: nil, l_temp_C: nil, l_weatherDesc: nil)
+        
+        XCTAssertTrue(locationCurrentWeatherInfoMock.humidity.isEmpty)
     }
     
 }

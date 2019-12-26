@@ -23,11 +23,19 @@ class LocationInfoTests: XCTestCase {
     func testAreaNameMatch() throws {
         
         // Given
-        let locationInfo = LocationInfo().initWithLocationInfoResult(l_areaName: "Punggol", l_country: "Singapore", l_latitude: "3.93", l_longitude: "5.09", l_population: "0", l_region: "", l_WeatherUrl: "https://www.worldweatheronline.com/v2/weather.aspx?q=1.3361,103.975")
+        let locationInfoMock = LocationInfo().initWithLocationInfoResult(l_areaName: "Punggol", l_country: "Singapore", l_latitude: "3.93", l_longitude: "5.09", l_population: "0", l_region: "", l_WeatherUrl: "https://www.mockurl.com")
         
         // Then
-        let locationInfoWrap = try XCTUnwrap(locationInfo)
+        let locationInfoWrap = try XCTUnwrap(locationInfoMock)
         XCTAssertEqual(locationInfoWrap.areaName, "Punggol")
+    }
+    
+    func testShouldCountryIsEmpty()
+    {
+        // Given
+        let locationInfoMock = LocationInfo().initWithLocationInfoResult(l_areaName: nil, l_country: nil, l_latitude: nil, l_longitude: nil, l_population: nil, l_region: nil, l_WeatherUrl:nil)
+        
+        XCTAssertTrue(locationInfoMock.country.isEmpty)
     }
     
 }

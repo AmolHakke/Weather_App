@@ -27,7 +27,6 @@ class WeatherDetailViewControllerTests: XCTestCase {
    func testWeatherDetialViewControllerNotNil() {
        
        XCTAssertNotNil(weatherDetailViewController, "Weather Detail View Contoller can't be nil")
-       
    }
     
     override func tearDown() {

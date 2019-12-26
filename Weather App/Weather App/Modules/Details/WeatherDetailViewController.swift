@@ -26,7 +26,7 @@ class WeatherDetailViewController: UIViewController {
     
     var db:CustomDB = CustomDB()
     
-    private var locationDetailInfoObj = LocationCurrentWeatherInfo()
+    public var locationDetailInfoObj = LocationCurrentWeatherInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
