@@ -21,7 +21,7 @@ class WeatherHomeViewController: UIViewController {
     
     public var locationArray = NSMutableArray()
     
-    private var locationInfoObj = LocationInfo()
+    public var locationInfoObj = LocationInfo()
     
     var db:CustomDB = CustomDB()
     
@@ -40,7 +40,7 @@ class WeatherHomeViewController: UIViewController {
         if segue.identifier == "WeatherDetailViewControllerSegue" {
             if segue.destination.isKind(of: WeatherDetailViewController.self) {
                 let secondVC = segue.destination as! WeatherDetailViewController
-
+                
                 let indexPath = sender as! IndexPath
                 secondVC.locationInfo = locationArray[indexPath.row] as! LocationInfo
             }
@@ -65,13 +65,13 @@ class WeatherHomeViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
-        if self.locationArray.count > 0 {
-            self.labelTitle.text = AppConstants.historyTitle
-        }
-        else
-        {
-            self.labelTitle.text = ""
-        }
+            if self.locationArray.count > 0 {
+                self.labelTitle.text = AppConstants.historyTitle
+            }
+            else
+            {
+                self.labelTitle.text = ""
+            }
         }
         
     }
@@ -84,32 +84,32 @@ class WeatherHomeViewController: UIViewController {
 
 extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
 {
-       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-       {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return self.locationArray.count
-       }
-       
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           
-           let cell:WeatherCustomCell = tableView.dequeueReusableCell(withIdentifier: "WeatherCustomCellID") as! WeatherCustomCell
-            locationInfoObj = locationArray.object(at: indexPath.row) as! LocationInfo
-            cell.cityLabel?.text = locationInfoObj.areaName
-            cell.countyLabel?.text = locationInfoObj.country
-            cell.weatherImageView?.image = UIImage(named: "weather_placeholer")
-           
-            return cell
-        }
+    }
     
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-            return 100.0
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:WeatherCustomCell = tableView.dequeueReusableCell(withIdentifier: "WeatherCustomCellID") as! WeatherCustomCell
+        locationInfoObj = locationArray.object(at: indexPath.row) as! LocationInfo
+        cell.cityLabel?.text = locationInfoObj.areaName
+        cell.countyLabel?.text = locationInfoObj.country
+        cell.weatherImageView?.image = UIImage(named: "weather_placeholer")
+        
+        return cell
+    }
     
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-
-            performSegue(withIdentifier: "WeatherDetailViewControllerSegue", sender: indexPath)
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 100.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: "WeatherDetailViewControllerSegue", sender: indexPath)
+    }
 }
 
 extension WeatherHomeViewController : UISearchBarDelegate {
@@ -119,7 +119,7 @@ extension WeatherHomeViewController : UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-                
+        
         locationSerarchService.getLocations(locationName: searchText, completionHandler: { resultArray in
             
             self.locationArray =  NSMutableArray()
@@ -127,21 +127,21 @@ extension WeatherHomeViewController : UISearchBarDelegate {
             if self.locationArray.count > 0
             {
                 DispatchQueue.main.async {
-                   self.weatherTableView.reloadData()
-                   self.labelTitle.text = AppConstants.searchResultTitle
+                    self.weatherTableView.reloadData()
+                    self.labelTitle.text = AppConstants.searchResultTitle
                 }
             }
             else
             {
                 self.getViewedCitiesList()
             }
-           
-       }, errorHandler: {
-                 self.locationArray =  NSMutableArray()
-                 DispatchQueue.main.async {
-                    self.weatherTableView.reloadData()
-                 }
-            })
+            
+        }, errorHandler: {
+            self.locationArray =  NSMutableArray()
+            DispatchQueue.main.async {
+                self.weatherTableView.reloadData()
+            }
+        })
     }
 }
 
