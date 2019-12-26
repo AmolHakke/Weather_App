@@ -19,7 +19,7 @@ class WeatherHomeViewController: UIViewController {
     
     let locationSerarchService = LocationSearchService()
     
-    private var locationArray = NSMutableArray()
+    public var locationArray = NSMutableArray()
     
     private var locationInfoObj = LocationInfo()
     
@@ -115,10 +115,6 @@ extension WeatherHomeViewController : UITableViewDelegate, UITableViewDataSource
 extension WeatherHomeViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
