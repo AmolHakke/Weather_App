@@ -28,6 +28,7 @@
 		8A7107AF23AB586500A44BB6 /* WeatherHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107AE23AB586500A44BB6 /* WeatherHomeViewController.swift */; };
 		8A7107B123AB588400A44BB6 /* WeatherDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107B023AB588400A44BB6 /* WeatherDetailViewController.swift */; };
 		8A7107B423AB641D00A44BB6 /* WeatherCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */; };
+		8AB1D86C23B50C6F00691195 /* WeatherHomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1D86B23B50C6F00691195 /* WeatherHomeViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		8A7107AE23AB586500A44BB6 /* WeatherHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHomeViewController.swift; sourceTree = "<group>"; };
 		8A7107B023AB588400A44BB6 /* WeatherDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewController.swift; sourceTree = "<group>"; };
 		8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCustomCell.swift; sourceTree = "<group>"; };
+		8AB1D86B23B50C6F00691195 /* WeatherHomeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherHomeViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		8A71079823AB51E900A44BB6 /* Weather AppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8AB1D86A23B50C6F00691195 /* Home */,
 				8A71079923AB51E900A44BB6 /* Weather_AppUITests.swift */,
 				8A71079B23AB51E900A44BB6 /* Info.plist */,
 			);
@@ -261,6 +264,14 @@
 				8A7107B323AB641D00A44BB6 /* WeatherCustomCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8AB1D86A23B50C6F00691195 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8AB1D86B23B50C6F00691195 /* WeatherHomeViewControllerTests.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,6 +436,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB1D86C23B50C6F00691195 /* WeatherHomeViewControllerTests.swift in Sources */,
 				8A71079A23AB51E900A44BB6 /* Weather_AppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
