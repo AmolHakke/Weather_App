@@ -11,11 +11,11 @@ import XCTest
 @testable import Weather_App
 
 class LocationInfoTests: XCTestCase {
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -29,5 +29,5 @@ class LocationInfoTests: XCTestCase {
         let locationInfoWrap = try XCTUnwrap(locationInfo)
         XCTAssertEqual(locationInfoWrap.areaName, "Punggol")
     }
-
+    
 }

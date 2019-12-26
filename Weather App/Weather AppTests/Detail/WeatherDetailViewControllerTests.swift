@@ -16,11 +16,11 @@ class WeatherDetailViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let locationInfoMock = LocationInfo().initWithLocationInfoResult(l_areaName: "Punggol", l_country: "Singapore", l_latitude: "3.93", l_longitude: "5.09", l_population: "0", l_region: "", l_WeatherUrl: "https://www.worldweatheronline.com/v2/weather.aspx?q=1.3361,103.975")
+        let locationInfoMock = LocationInfo().initWithLocationInfoResult(l_areaName: "Punggol", l_country: "Singapore", l_latitude: "3.93", l_longitude: "5.09", l_population: "0", l_region: "", l_WeatherUrl: "https://www.mockurl.com")
         weatherDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "WeatherDetailViewControllerID") as? WeatherDetailViewController
         weatherDetailViewController.locationInfo = locationInfoMock
-//        weatherDetailViewController.viewDidLoad()
-//        sleep(3)
+        weatherDetailViewController.viewDidLoad()
+        sleep(3)
     }
 
 

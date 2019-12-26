@@ -19,42 +19,42 @@ class LocationDetailService {
         
         if let url = urlString {
             
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            guard error == nil else {
-                errorHandler()
-                return
-            }
-            do {
-                let jsonResult:AnyObject =  (try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? NSDictionary)!
-                print(jsonResult)
-                   guard let dataJson = jsonResult["data"] as? [String: Any],
-                               let currentConditionArray = dataJson["current_condition"] as? [[String: Any]],
-                              
-                               let conditionObject = currentConditionArray.first,
-                               let tempc = conditionObject["temp_C"] as? String,
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                guard error == nil else {
+                    errorHandler()
+                    return
+                }
+                do {
+                    let jsonResult:AnyObject =  (try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? NSDictionary)!
+                    print(jsonResult)
+                    guard let dataJson = jsonResult["data"] as? [String: Any],
+                        let currentConditionArray = dataJson["current_condition"] as? [[String: Any]],
+                        
+                        let conditionObject = currentConditionArray.first,
+                        let tempc = conditionObject["temp_C"] as? String,
+                        
+                        let humidity = conditionObject["humidity"] as? String,
+                        
+                        let weatherIconUrlArray = conditionObject["weatherIconUrl"] as? [[String: Any]],
+                        let weatherIconUrlObj = weatherIconUrlArray.first,
+                        let weatherIconUrl = weatherIconUrlObj["value"] as? String,
+                        
+                        let weatherDescArray = conditionObject["weatherDesc"] as? [[String: Any]],
+                        let descObject = weatherDescArray.first,
+                        let weatherDesc = descObject["value"] as? String else {
+                            errorHandler()
+                            return
+                    }
+                    let locationDetail =  LocationCurrentWeatherInfo().initWithLocationCurrentWeatherInfo(l_weatherIconUrl: weatherIconUrl, l_humidity: humidity, l_temp_C: tempc, l_weatherDesc: weatherDesc)
+                    completionHandler(locationDetail)
                     
-                               let humidity = conditionObject["humidity"] as? String,
-                    
-                               let weatherIconUrlArray = conditionObject["weatherIconUrl"] as? [[String: Any]],
-                               let weatherIconUrlObj = weatherIconUrlArray.first,
-                               let weatherIconUrl = weatherIconUrlObj["value"] as? String,
-                    
-                               let weatherDescArray = conditionObject["weatherDesc"] as? [[String: Any]],
-                               let descObject = weatherDescArray.first,
-                               let weatherDesc = descObject["value"] as? String else {
-                                   errorHandler()
-                                   return
-                           }
-                        let locationDetail =  LocationCurrentWeatherInfo().initWithLocationCurrentWeatherInfo(l_weatherIconUrl: weatherIconUrl, l_humidity: humidity, l_temp_C: tempc, l_weatherDesc: weatherDesc)
-                           completionHandler(locationDetail)
-          
+                }
+                catch _ as NSError {
+                    errorHandler()
+                }
+                
             }
-            catch _ as NSError {
-                errorHandler()
-            }
-            
-        }
             detailFetchTask?.cancel()
             detailFetchTask = task
             detailFetchTask?.resume()

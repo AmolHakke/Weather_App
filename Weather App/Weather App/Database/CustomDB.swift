@@ -16,10 +16,10 @@ class CustomDB
         db = openDatabase()
         createTable()
     }
-
+    
     let dbPath: String = "Location.sqlite"
     var db:OpaquePointer?
-
+    
     func openDatabase() -> OpaquePointer?
     {
         let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
