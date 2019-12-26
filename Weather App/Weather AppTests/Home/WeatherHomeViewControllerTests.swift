@@ -14,10 +14,15 @@ class WeatherHomeViewControllerTests: XCTestCase {
     
     var weatherHomeViewController: WeatherHomeViewController!
     
+    let tableView = UITableView()
+    
     override func setUp() {
         super.setUp()
         weatherHomeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "WeatherHomeViewControllerID") as? WeatherHomeViewController
         weatherHomeViewController.loadView()
+        
+        weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "Singapore")
+         sleep(3)
     }
     
     override func tearDown() {
@@ -70,8 +75,6 @@ class WeatherHomeViewControllerTests: XCTestCase {
     }
     
     func testGetLocationArrayCountEqualToOne() {
-        weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "Singapore")
-        sleep(3)
         XCTAssertEqual(weatherHomeViewController.locationArray.count, 1)
     }
     
@@ -80,10 +83,6 @@ class WeatherHomeViewControllerTests: XCTestCase {
     }
     
     func testTableViewShouldDisplayOneRecord() {
-        
-        weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "Singapore")
-        sleep(3)
-        let tableView = UITableView()
         
         let numberOfRows = weatherHomeViewController.tableView(tableView, numberOfRowsInSection: 0)
         XCTAssertEqual(numberOfRows, 1,
@@ -112,9 +111,6 @@ class WeatherHomeViewControllerTests: XCTestCase {
     
     func testSelectingCell() {
            
-           weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "Singapore")
-           sleep(3)
-           let tableView = UITableView()
         weatherHomeViewController.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         
         let locationInfo: LocationInfo = weatherHomeViewController.locationArray[0] as! LocationInfo
@@ -124,18 +120,19 @@ class WeatherHomeViewControllerTests: XCTestCase {
        }
     
     func testCellForRow() {
-        
-        weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "Singapore")
-        
-        sleep(3)
-        
-        let tableView = UITableView()
+    
         tableView.register(WeatherCustomCell.self, forCellReuseIdentifier: "WeatherCustomCellID")
-        sleep(2)
-         weatherHomeViewController.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
-        
+      
+        let _: WeatherCustomCell =  weatherHomeViewController.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! WeatherCustomCell
+          sleep(2)
         XCTAssertEqual(weatherHomeViewController.locationInfoObj.country, "Singapore",
                        "The first cell should display country name of Singapore")
+    }
+    
+    func testLocationArrayEmptyOrMoreThenOne() {
+        weatherHomeViewController.searchBar(weatherHomeViewController.searchBar, textDidChange: "")
+                sleep(3)
+        XCTAssertTrue(weatherHomeViewController.locationArray.count >= 0)
     }
     
 }
