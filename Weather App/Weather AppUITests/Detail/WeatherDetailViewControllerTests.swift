@@ -37,7 +37,7 @@ class WeatherDetailViewControllerTests: XCTestCase {
         
           let firstCell = app.tables.cells.element(boundBy: 0)
           firstCell.tap()
-        
+          sleep(3)
           let rightNavBarButton = app.navigationBars.children(matching: .button).firstMatch
           XCTAssert(rightNavBarButton.exists)
           

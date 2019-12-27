@@ -109,7 +109,7 @@ class WeatherHomeViewControllerTests: XCTestCase {
                         "TableView should be able to dequeue cell with identifier: 'WeatherCustomCellID'")
     }
     
-    func testSelectingCell() {
+    func testSelectingCellToMatchWithString() {
         
         weatherHomeViewController.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         
